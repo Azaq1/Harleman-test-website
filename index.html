@@ -706,7 +706,7 @@
         /* ── Portfolio Section ── */
         .portfolio {
             background-color: var(--light);
-            padding: 7rem 2rem;
+            padding: 7rem 2rem 3rem;
         }
 
         .portfolio-header {
@@ -757,13 +757,22 @@
             color: var(--gold);
         }
 
-        /* Portfolio Grid */
+        /* Portfolio Grid — top 3 + bottom 2 */
         .portfolio-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 280px;
+            grid-auto-rows: 300px;
+            gap: 1rem;
+        }
+
+        .portfolio-grid-bottom {
+            max-width: 1200px;
+            margin: 1rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 300px;
             gap: 1rem;
         }
 
@@ -772,10 +781,6 @@
             border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
-        }
-
-        .portfolio-item.large {
-            grid-column: span 2;
         }
 
         .portfolio-item.hidden {
@@ -883,13 +888,10 @@
         }
 
         @media (max-width: 900px) {
-            .portfolio-grid {
+            .portfolio-grid,
+            .portfolio-grid-bottom {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 240px;
-            }
-
-            .portfolio-item.large {
-                grid-column: span 1;
             }
 
             .portfolio-overlay {
@@ -912,7 +914,8 @@
                 padding: 4rem 1.25rem;
             }
 
-            .portfolio-grid {
+            .portfolio-grid,
+            .portfolio-grid-bottom {
                 grid-template-columns: 1fr;
                 grid-auto-rows: 220px;
             }
@@ -1832,9 +1835,9 @@
             <button class="filter-btn" data-filter="dakkapellen">Dakkapellen</button>
         </div>
 
-        <!-- Portfolio Grid -->
+        <!-- Portfolio Grid top 3 -->
         <div class="portfolio-grid reveal">
-            <div class="portfolio-item large" data-category="nieuwbouw">
+            <div class="portfolio-item" data-category="nieuwbouw">
                 <div class="portfolio-img" style="background-image: url('nieuwbouw.jpg');"></div>
                 <div class="portfolio-overlay">
                     <div class="portfolio-info">
@@ -1866,7 +1869,10 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Portfolio Grid bottom 2 -->
+        <div class="portfolio-grid-bottom reveal" style="transition-delay:0.15s;">
             <div class="portfolio-item" data-category="gevelrenovatie">
                 <div class="portfolio-img" style="background-image: url('gevelrenovatie.jpeg');"></div>
                 <div class="portfolio-overlay">
@@ -1878,7 +1884,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-item large" data-category="onderhoud">
+            <div class="portfolio-item" data-category="onderhoud">
                 <div class="portfolio-img" style="background-image: url('onderhoud.jpg'); background-position: center 30%;"></div>
                 <div class="portfolio-overlay">
                     <div class="portfolio-info">
@@ -2144,6 +2150,11 @@
                     } else {
                         item.classList.add('hidden');
                     }
+                });
+                // Verberg lege grid containers
+                document.querySelectorAll('.portfolio-grid, .portfolio-grid-bottom').forEach(grid => {
+                    const hasVisible = [...grid.querySelectorAll('.portfolio-item')].some(i => !i.classList.contains('hidden'));
+                    grid.style.display = hasVisible ? '' : 'none';
                 });
             });
         });
