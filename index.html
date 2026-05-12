@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harleman Aannemersbedrijf - Premium Bouwbedrijf Deventer</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --gold: #E9C362;
+            --taupe: #958C8A;
+            --dark: #2B2B2B;
+            --light: #F7F5F3;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        h1 {
+            font-size: clamp(4rem, 9vw, 10rem);
+            line-height: 1.0;
+            font-weight: 700;
+            letter-spacing: -3px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(22, 22, 22, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(233, 195, 98, 0.15);
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(18, 18, 18, 0.99);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            padding: 0.75rem 2rem;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 45px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--gold);
+            color: var(--dark);
+            padding: 0.75rem 1.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(43, 43, 43, 0.85) 0%, rgba(149, 140, 138, 0.7) 100%), url('harleman auto.jpeg');
+            background-size: cover;
+            background-position: center right;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2rem;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(43, 43, 43, 0.95) 0%, rgba(43, 43, 43, 0.4) 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin-left: 2rem;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+            margin-top: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(10px);
+        }
+
+        .hero-subtitle.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-h1 {
+            color: var(--white);
+            margin-bottom: 0;
+            animation: popIn 0.9s ease-out 0.1s both;
+            font-size: clamp(2.8rem, 4.5vw, 4.5rem) !important;
+            line-height: 1.15 !important;
+            letter-spacing: -1px !important;
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+            font-style: normal !important;
+            white-space: nowrap;
+        }
+
+        .hero-h1 span {
+            display: inline;
+        }
+
+        .hero-h1 span:first-child {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 500px;
+            opacity: 0;
+            transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+            transform: translateY(10px);
+        }
+
+        .hero-description.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transition: opacity 1s ease 0.4s, transform 1s ease 0.4s;
+            transform: translateY(10px);
+        }
+
+        .hero-buttons.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .primary-btn {
+            background-color: var(--gold);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
+        }
+
+        .primary-btn:hover {
+            background-color: transparent;
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(233, 195, 98, 0.3);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--white);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ── Stats Bar ── */
+        .stats-bar {
+            background-color: var(--dark);
+            padding: 1.25rem 0;
+            border-bottom: 2px solid var(--gold);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stats-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            animation: marquee 28s linear infinite;
+        }
+
+        .stats-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0 3.5rem;
+            white-space: nowrap;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-icon {
+            font-size: 1.1rem;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 32px;
+            background-color: rgba(233, 195, 98, 0.35);
+            flex-shrink: 0;
+        }
+
+        /* ── About Section ── */
+        .about {
+            background-color: var(--light);
+            padding: 7rem 2rem;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.25rem;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .about-h2 {
+            font-size: 2.6rem;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 1.75rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .about-intro {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .about-body {
+            font-size: 0.95rem;
+            color: var(--taupe);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .about-highlights {
+            margin-top: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .highlight-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+            border-radius: 4px;
+            overflow: visible;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -1.5rem;
+            left: -1.5rem;
+            background-color: var(--gold);
+            padding: 1.25rem 1.75rem;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(233,195,98,0.3);
+        }
+
+        .badge-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1;
+        }
+
+        .badge-text {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* ── Diensten Section ── */
+        .diensten {
+            background-color: #1A1A1A;
+            padding: 7rem 2rem;
+        }
+
+        .diensten-header {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .diensten-subtext {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 480px;
+            margin-top: 0.75rem;
+        }
+
+        .diensten-header-left h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-top: 0.25rem;
+        }
+
+        .diensten-header-left h2 span {
+            color: var(--gold);
+        }
+
+
+        /* Grid: 3 bovenaan + 2 onderaan */
+        .diensten-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.25rem;
+        }
+
+        .dienst-card {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            height: 340px;
+        }
+
+        /* De 4e en 5e kaart samen 2 kolommen breed */
+        .dienst-card:nth-child(4) {
+            grid-column: span 1;
+        }
+
+        .dienst-card:nth-child(4),
+        .dienst-card:nth-child(5) {
+            height: 300px;
+        }
+
+        /* Bottom row: 2 kaarten centreren */
+        .diensten-grid-bottom {
+            max-width: 1200px;
+            margin: 1.25rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .dienst-card-bottom {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            height: 300px;
+        }
+
+        .dienst-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .dienst-card:hover .dienst-bg,
+        .dienst-card-bottom:hover .dienst-bg {
+            transform: scale(1.06);
+        }
+
+        .dienst-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%);
+            transition: background 0.4s ease;
+        }
+
+        .dienst-card:hover .dienst-overlay,
+        .dienst-card-bottom:hover .dienst-overlay {
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+        }
+
+        .dienst-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.75rem;
+            z-index: 2;
+        }
+
+        .dienst-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 0.4rem;
+            opacity: 0.8;
+        }
+
+        .dienst-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .dienst-desc {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .dienst-card:hover .dienst-desc,
+        .dienst-card-bottom:hover .dienst-desc {
+            max-height: 80px;
+            opacity: 1;
+        }
+
+        .dienst-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+            letter-spacing: 0.5px;
+        }
+
+        .dienst-card:hover .dienst-arrow,
+        .dienst-card-bottom:hover .dienst-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .dienst-gold-accent {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 32px;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .dienst-card:hover .dienst-gold-accent,
+        .dienst-card-bottom:hover .dienst-gold-accent {
+            width: 48px;
+        }
+
+        @media (max-width: 900px) {
+            .diensten-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .diensten-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .diensten-grid-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .dienst-card {
+                height: 260px;
+            }
+
+            .dienst-card-bottom {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .diensten {
+                padding: 4rem 1.25rem;
+            }
+
+            .diensten-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .diensten-header-left h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ── Portfolio Section ── */
+        .portfolio {
+            background-color: var(--light);
+            padding: 7rem 2rem;
+        }
+
+        .portfolio-header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .portfolio-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-top: 0.25rem;
+        }
+
+        .portfolio-subtext {
+            color: var(--taupe);
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+        }
+
+        /* Filter buttons */
+        .portfolio-filters {
+            max-width: 1200px;
+            margin: 0 auto 2.5rem;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.55rem 1.4rem;
+            border: 1.5px solid rgba(43,43,43,0.2);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--taupe);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            color: var(--gold);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 280px;
+            gap: 1rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item.large {
+            grid-column: span 2;
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+        }
+
+        .portfolio-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.06);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.85) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            transform: translateY(12px);
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-cat {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .portfolio-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .portfolio-link {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-link {
+            color: var(--gold);
+        }
+
+        /* Gold border accent on hover */
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+            pointer-events: none;
+        }
+
+        .portfolio-item:hover::after {
+            border-color: rgba(233,195,98,0.4);
+        }
+
+        /* CTA */
+        .portfolio-cta {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            background-color: var(--dark);
+            border-radius: 4px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .portfolio-cta p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 240px;
+            }
+
+            .portfolio-item.large {
+                grid-column: span 1;
+            }
+
+            .portfolio-overlay {
+                opacity: 1;
+            }
+
+            .portfolio-info {
+                transform: translateY(0);
+            }
+
+            .portfolio-cta {
+                flex-direction: column;
+                gap: 1.25rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .portfolio {
+                padding: 4rem 1.25rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 220px;
+            }
+
+            .portfolio-h2 {
+                font-size: 2rem;
+            }
+
+            .portfolio-overlay {
+                opacity: 1;
+            }
+
+            .portfolio-info {
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Werkgebied ── */
+        .werkgebied {
+            background-color: var(--dark);
+            padding: 7rem 2rem;
+        }
+
+        .werkgebied-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .werkgebied-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #fff;
+            margin-top: 0.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .werkgebied-intro {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .werkgebied-intro strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .werkgebied-steden {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .stad-item {
+            position: relative;
+            padding: 0.5rem 1.2rem;
+            border: 1.5px solid rgba(233,195,98,0.4);
+            border-radius: 50px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: default;
+            overflow: hidden;
+            transition: color 0.35s ease, border-color 0.35s ease;
+            z-index: 0;
+        }
+
+        .stad-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: var(--gold);
+            transform: translateX(-101%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .stad-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .stad-item:hover {
+            color: var(--dark);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        .werkgebied-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            background: rgba(233,195,98,0.08);
+            border-left: 3px solid var(--gold);
+            padding: 0.9rem 1.1rem;
+            border-radius: 0 4px 4px 0;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .map-wrapper {
+            position: relative;
+            height: 480px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .map-wrapper iframe {
+            filter: grayscale(30%) contrast(1.1);
+        }
+
+        .map-overlay-badge {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background-color: var(--dark);
+            border: 1px solid rgba(233,195,98,0.3);
+            color: var(--gold);
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 900px) {
+            .werkgebied-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .map-wrapper { height: 320px; }
+        }
+
+        /* ── Contact ── */
+        .contact {
+            background-color: var(--light);
+            padding: 7rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .contact-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: var(--dark);
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-intro {
+            color: var(--taupe);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(233,195,98,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-detail-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--taupe);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-detail-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* Form */
+        .contact-form-wrap {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+            border-top: 3px solid var(--gold);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--dark);
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 1.5px solid rgba(43,43,43,0.15);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+            background: #fff;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-error {
+            font-size: 0.75rem;
+            color: #e53e3e;
+            min-height: 1rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--gold);
+            color: var(--dark);
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        .form-success {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.9rem 1.2rem;
+            background: rgba(72,187,120,0.1);
+            border: 1px solid rgba(72,187,120,0.4);
+            border-radius: 4px;
+            color: #276749;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .contact-container { grid-template-columns: 1fr; gap: 3rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background-color: #111;
+            padding: 4rem 2rem 0;
+            border-top: 1px solid rgba(233,195,98,0.15);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .footer-logo {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links ul a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul a:hover { color: var(--gold); }
+
+        .footer-contact p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.78rem;
+        }
+
+        @media (max-width: 900px) {
+            .footer-container { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-container { grid-template-columns: 1fr; }
+            .contact { padding: 4rem 1.25rem; }
+            .werkgebied { padding: 4rem 1.25rem; }
+            .contact-form-wrap { padding: 1.5rem; }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* About responsive */
+        @media (max-width: 900px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .about-img-wrapper img {
+                height: 320px;
+            }
+
+            .about-badge {
+                bottom: -1rem;
+                left: 1rem;
+            }
+
+            .stat-item {
+                padding: 0.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            .stat-item {
+                flex: 0 0 45%;
+                padding: 0.5rem 0.5rem;
+            }
+
+            .about {
+                padding: 4rem 1.25rem;
+            }
+
+            .about-h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ── Loading Screen ── */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: #111111;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: loaderFadeUp 0.9s ease 0.2s forwards;
+            height: 45px;
+        }
+
+        .loader-logo img {
+            height: 100%;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .loader-tagline {
+            opacity: 0;
+            animation: loaderFadeUp 0.9s ease 0.5s forwards;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        .loader-bar-wrap {
+            width: 180px;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: loaderFadeUp 0.6s ease 0.7s forwards;
+        }
+
+        .loader-bar {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            animation: loaderSweep 1.4s ease 0.9s forwards;
+        }
+
+        .loader-line-left,
+        .loader-line-right {
+            position: absolute;
+            top: 50%;
+            height: 1px;
+            background: rgba(233,195,98,0.5);
+            transform: scaleX(0);
+        }
+
+        .loader-line-left {
+            right: calc(50% + 95px);
+            width: 60px;
+            transform-origin: right;
+            animation: loaderLineGrow 0.6s ease 1.5s forwards;
+        }
+
+        .loader-line-right {
+            left: calc(50% + 95px);
+            width: 60px;
+            transform-origin: left;
+            animation: loaderLineGrow 0.6s ease 1.5s forwards;
+        }
+
+        @keyframes loaderFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes loaderSweep {
+            0%   { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes loaderLineGrow {
+            to { transform: scaleX(1); }
+        }
+
+        /* ── Typewriter cursor ── */
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 0.85em;
+            background-color: var(--gold);
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
+        }
+
+        /* Animations */
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.7) translateY(40px);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .navbar {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                margin-top: 60px;
+                background-position: center;
+            }
+
+            .hero-content {
+                margin-left: 1rem;
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .primary-btn, .secondary-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .hero-h1 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+            }
+
+            .primary-btn, .secondary-btn {
+                padding: 0.85rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-logo">
+            <img src="imgi_4_logo-harlemanbv.png" alt="Harleman">
+        </div>
+        <div class="loader-bar-wrap">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <img src="imgi_4_logo-harlemanbv.png" alt="Harleman Aannemersbedrijf">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#over-ons">Over Ons</a></li>
+                <li><a href="#diensten">Diensten</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#werkgebied">Werkgebied</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Offerte Aanvragen</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-h1" id="heroTitle">
+                <span id="typeText"></span><span id="typeGold" style="color:var(--gold);"></span><span class="type-cursor" id="typeCursor"></span>
+            </h1>
+            <div class="hero-subtitle">45+ JAAR VAKMANSCHAP</div>
+            <p class="hero-description">
+                Met meer dan 45 jaar ervaring transformeren wij jouw bouwdroom in werkelijkheid.
+            </p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="primary-btn">Bekijk Onze Projecten</a>
+                <a href="#contact" class="secondary-btn">Vraag Offerte Aan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-track">
+            <!-- Set 1 -->
+            <div class="stat-item">
+                <span class="stat-number">45+</span>
+                <span class="stat-label">Jaar Ervaring</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">✓</span>
+                <span class="stat-label">Erkend Aannemer</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">📍</span>
+                <span class="stat-label">Deventer & Omgeving</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-label">BouwGarant</span>
+            </div>
+            <div class="stat-divider"></div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="stat-item">
+                <span class="stat-number">45+</span>
+                <span class="stat-label">Jaar Ervaring</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">✓</span>
+                <span class="stat-label">Erkend Aannemer</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">📍</span>
+                <span class="stat-label">Deventer & Omgeving</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-label">BouwGarant</span>
+            </div>
+            <div class="stat-divider"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="over-ons">
+        <div class="about-container">
+            <div class="about-text reveal">
+                <span class="section-label">Over Ons</span>
+                <h2 class="about-h2">Vakmanschap dat <span style="color: var(--gold);">generaties</span> overstijgt</h2>
+                <p class="about-intro">
+                    Harleman Aannemersbedrijf B.V. is opgericht in 1979 en sindsdien uitgegroeid tot een vertrouwde naam in de bouw in Deventer en omgeving.
+                </p>
+                <p class="about-body">
+                    Met meer dan 45 jaar ervaring leveren wij kwaliteitswerk op het gebied van nieuwbouw, renovatie, onderhoud, gevelrenovatie en dakkapellen. Wij werken nauwgezet, eerlijk en altijd met oog voor detail — zodat elk project tot in de puntjes klopt.
+                </p>
+                <p class="about-body">
+                    Als BouwGarant-gecertificeerd bedrijf staan wij garant voor betrouwbaarheid, transparantie en vakkundig werk. Van kleine klussen tot grote bouwprojecten: bij Harleman bent u in goede handen.
+                </p>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-dot"></div>
+                        <span>Opgericht in 1979 — meer dan 45 jaar actief</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-dot"></div>
+                        <span>BouwGarant gecertificeerd</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-dot"></div>
+                        <span>Actief in Deventer en de gehele regio</span>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-dot"></div>
+                        <span>Van nieuwbouw tot renovatie & onderhoud</span>
+                    </div>
+                </div>
+                <a href="#contact" class="primary-btn" style="margin-top: 2rem; display: inline-block;">Neem Contact Op</a>
+            </div>
+            <div class="about-image reveal" style="transition-delay: 0.2s;">
+                <div class="about-img-wrapper">
+                    <img src="harleman auto.jpeg" alt="Harleman Aannemersbedrijf - Vakmanschap">
+                    <div class="about-badge">
+                        <span class="badge-number">1979</span>
+                        <span class="badge-text">Opgericht</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diensten Section -->
+    <section class="diensten" id="diensten">
+        <div class="diensten-header reveal">
+            <div class="diensten-header-left">
+                <span class="section-label" style="color:var(--gold);">Wat wij doen</span>
+                <h2>Onze <span>diensten</span></h2>
+                <p class="diensten-subtext">Van nieuwbouw tot renovatie — wij leveren vakwerk op elk gebied. Met 45+ jaar ervaring pakken wij elk project met zorg en precisie aan.</p>
+            </div>
+        </div>
+
+        <!-- Top row: 3 kaarten -->
+        <div class="diensten-grid reveal">
+            <div class="dienst-card">
+                <div class="dienst-bg" style="background-image: url('nieuwbouw.jpg');"></div>
+                <div class="dienst-overlay"></div>
+                <div class="dienst-gold-accent"></div>
+                <div class="dienst-content">
+                    <div class="dienst-number">01</div>
+                    <div class="dienst-title">Nieuwbouw</div>
+                    <div class="dienst-desc">Van fundament tot oplevering — wij realiseren nieuwbouwprojecten met oog voor kwaliteit en detail.</div>
+                    <div class="dienst-arrow">Meer info →</div>
+                </div>
+            </div>
+
+            <div class="dienst-card">
+                <div class="dienst-bg" style="background-image: url('renovatie.jpg');"></div>
+                <div class="dienst-overlay"></div>
+                <div class="dienst-gold-accent"></div>
+                <div class="dienst-content">
+                    <div class="dienst-number">02</div>
+                    <div class="dienst-title">Renovatie</div>
+                    <div class="dienst-desc">Wij geven bestaande gebouwen een nieuw leven — grondig, vakkundig en met respect voor het origineel.</div>
+                    <div class="dienst-arrow">Meer info →</div>
+                </div>
+            </div>
+
+            <div class="dienst-card">
+                <div class="dienst-bg" style="background-image: url('onderhoud.jpg');"></div>
+                <div class="dienst-overlay"></div>
+                <div class="dienst-gold-accent"></div>
+                <div class="dienst-content">
+                    <div class="dienst-number">03</div>
+                    <div class="dienst-title">Onderhoud</div>
+                    <div class="dienst-desc">Regelmatig onderhoud voorkomt grotere schade. Wij zorgen dat uw pand er altijd goed bij staat.</div>
+                    <div class="dienst-arrow">Meer info →</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom row: 2 kaarten -->
+        <div class="diensten-grid-bottom reveal" style="transition-delay:0.15s;">
+            <div class="dienst-card-bottom">
+                <div class="dienst-bg" style="background-image: url('gevelrenovatie.jpeg');"></div>
+                <div class="dienst-overlay"></div>
+                <div class="dienst-gold-accent"></div>
+                <div class="dienst-content">
+                    <div class="dienst-number">04</div>
+                    <div class="dienst-title">Gevelrenovatie</div>
+                    <div class="dienst-desc">Uw gevel is het visitekaartje van uw pand. Wij renoveren gevels duurzaam en esthetisch verantwoord.</div>
+                    <div class="dienst-arrow">Meer info →</div>
+                </div>
+            </div>
+
+            <div class="dienst-card-bottom">
+                <div class="dienst-bg" style="background-image: url('dakkappel.jpg');"></div>
+                <div class="dienst-overlay"></div>
+                <div class="dienst-gold-accent"></div>
+                <div class="dienst-content">
+                    <div class="dienst-number">05</div>
+                    <div class="dienst-title">Dakkapellen</div>
+                    <div class="dienst-desc">Meer ruimte en licht in huis? Wij plaatsen dakkapellen snel, netjes en volledig conform de regels.</div>
+                    <div class="dienst-arrow">Meer info →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-header reveal">
+            <div>
+                <span class="section-label">Ons werk</span>
+                <h2 class="portfolio-h2">Projecten waar wij <span style="color:var(--gold);">trots</span> op zijn</h2>
+                <p class="portfolio-subtext">Een selectie van onze uitgevoerde projecten in Deventer en omgeving.</p>
+            </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="portfolio-filters reveal">
+            <button class="filter-btn active" data-filter="all">Alle projecten</button>
+            <button class="filter-btn" data-filter="nieuwbouw">Nieuwbouw</button>
+            <button class="filter-btn" data-filter="renovatie">Renovatie</button>
+            <button class="filter-btn" data-filter="onderhoud">Onderhoud</button>
+            <button class="filter-btn" data-filter="gevelrenovatie">Gevelrenovatie</button>
+            <button class="filter-btn" data-filter="dakkapellen">Dakkapellen</button>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid reveal">
+            <div class="portfolio-item large" data-category="nieuwbouw">
+                <div class="portfolio-img" style="background-image: url('nieuwbouw.jpg');"></div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Nieuwbouw</span>
+                        <h3 class="portfolio-title">Appartementencomplex Deventer</h3>
+                        <span class="portfolio-link">Bekijk project →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="renovatie">
+                <div class="portfolio-img" style="background-image: url('renovatie.jpg');"></div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Renovatie</span>
+                        <h3 class="portfolio-title">Grootschalige woningrenovatie</h3>
+                        <span class="portfolio-link">Bekijk project →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="dakkapellen">
+                <div class="portfolio-img" style="background-image: url('dakkappel.jpg');"></div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Dakkapellen</span>
+                        <h3 class="portfolio-title">Dakkapel plaatsing Deventer</h3>
+                        <span class="portfolio-link">Bekijk project →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-category="gevelrenovatie">
+                <div class="portfolio-img" style="background-image: url('gevelrenovatie.jpeg');"></div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Gevelrenovatie</span>
+                        <h3 class="portfolio-title">Gevelrenovatie woonhuis</h3>
+                        <span class="portfolio-link">Bekijk project →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item large" data-category="onderhoud">
+                <div class="portfolio-img" style="background-image: url('onderhoud.jpg'); background-position: center 30%;"></div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Onderhoud</span>
+                        <h3 class="portfolio-title">Gevelonderhoud & herstelwerk</h3>
+                        <span class="portfolio-link">Bekijk project →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-cta reveal">
+            <p>Meer projecten bekijken of een vrijblijvende offerte aanvragen?</p>
+            <a href="#contact" class="primary-btn">Neem contact op</a>
+        </div>
+    </section>
+
+    <!-- Werkgebied Section -->
+    <section class="werkgebied" id="werkgebied">
+        <div class="werkgebied-container">
+            <div class="werkgebied-text reveal">
+                <span class="section-label" style="color:var(--gold);">Waar wij actief zijn</span>
+                <h2 class="werkgebied-h2">Werkgebied</h2>
+                <p class="werkgebied-intro">Harleman Aannemersbedrijf is gevestigd in <strong>Deventer</strong> en actief in de gehele regio. Wij werken voor particulieren en bedrijven in een ruime straal rondom onze thuisbasis.</p>
+                <div class="werkgebied-steden">
+                    <div class="stad-item">Deventer</div>
+                    <div class="stad-item">Zutphen</div>
+                    <div class="stad-item">Apeldoorn</div>
+                    <div class="stad-item">Zwolle</div>
+                    <div class="stad-item">Lochem</div>
+                    <div class="stad-item">Bathmen</div>
+                    <div class="stad-item">Diepenveen</div>
+                    <div class="stad-item">Olst</div>
+                    <div class="stad-item">Wijhe</div>
+                    <div class="stad-item">Voorst</div>
+                </div>
+                <div class="werkgebied-note">
+                    <span>📍</span>
+                    <span>Buiten dit werkgebied? Neem contact op — wij kijken graag naar de mogelijkheden.</span>
+                </div>
+            </div>
+            <div class="werkgebied-map reveal" style="transition-delay:0.2s;">
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d78879.06!2d6.1!3d52.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c7d51e72b7a82d%3A0x4046ea4ac8e64b0!2sDeventer!5e0!3m2!1snl!2snl!4v1"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="map-overlay-badge">
+                        <span>📍</span>
+                        <span>Deventer & Omgeving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <span class="section-label" style="color:var(--gold);">Vraag een offerte aan</span>
+                <h2 class="contact-h2">Neem <span style="color:var(--gold);">contact</span> op</h2>
+                <p class="contact-intro">Heeft u een bouwproject, renovatie of onderhoud in gedachten? Neem gerust contact op — wij staan klaar voor een vrijblijvend gesprek.</p>
+
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <div class="contact-detail-label">Telefoon</div>
+                            <div class="contact-detail-value">+31 (0)57 012 3456</div>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <div class="contact-detail-label">E-mail</div>
+                            <div class="contact-detail-value">info@harlemanbv.nl</div>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="contact-detail-label">Adres</div>
+                            <div class="contact-detail-value">Deventer, Overijssel</div>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <div class="contact-detail-label">Openingstijden</div>
+                            <div class="contact-detail-value">Ma – Vr: 07:30 – 17:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrap reveal" style="transition-delay:0.2s;">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Naam *</label>
+                            <input type="text" id="naam" placeholder="Uw volledige naam" required>
+                            <span class="form-error" id="naamError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefoonnummer</label>
+                            <input type="tel" id="telefoon" placeholder="Uw telefoonnummer">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mailadres *</label>
+                        <input type="email" id="email" placeholder="uw@email.nl" required>
+                        <span class="form-error" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Dienst</label>
+                        <select id="dienst">
+                            <option value="">Selecteer een dienst</option>
+                            <option value="nieuwbouw">Nieuwbouw</option>
+                            <option value="renovatie">Renovatie</option>
+                            <option value="onderhoud">Onderhoud</option>
+                            <option value="gevelrenovatie">Gevelrenovatie</option>
+                            <option value="dakkapellen">Dakkapellen</option>
+                            <option value="anders">Anders / Weet ik nog niet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bericht *</label>
+                        <textarea id="bericht" placeholder="Beschrijf uw project of vraag..." rows="5" required></textarea>
+                        <span class="form-error" id="berichtError"></span>
+                    </div>
+                    <button type="submit" class="form-submit">Verstuur aanvraag</button>
+                    <div class="form-success" id="formSuccess">✓ Uw bericht is verzonden! Wij nemen zo spoedig mogelijk contact op.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="imgi_4_logo-harlemanbv.png" alt="Harleman" class="footer-logo">
+                <p class="footer-tagline">Vakmanschap dat generaties overstijgt.<br>Deventer & Omgeving — Est. 1979</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigatie</h4>
+                <ul>
+                    <li><a href="#over-ons">Over Ons</a></li>
+                    <li><a href="#diensten">Diensten</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#werkgebied">Werkgebied</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Diensten</h4>
+                <ul>
+                    <li><a href="#diensten">Nieuwbouw</a></li>
+                    <li><a href="#diensten">Renovatie</a></li>
+                    <li><a href="#diensten">Onderhoud</a></li>
+                    <li><a href="#diensten">Gevelrenovatie</a></li>
+                    <li><a href="#diensten">Dakkapellen</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>📞 +31 (0)57 012 3456</p>
+                <p>✉️ info@harlemanbv.nl</p>
+                <p>📍 Deventer, Overijssel</p>
+                <p style="margin-top:1rem; font-size:0.8rem; color:var(--taupe);">Ma – Vr: 07:30 – 17:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Harleman Aannemersbedrijf B.V. — Alle rechten voorbehouden</p>
+            <p>KvK: 12345678 &nbsp;|&nbsp; BTW: NL123456789B01</p>
+        </div>
+    </footer>
+
+    <!-- Scroll behavior script -->
+    <script>
+        // Loading screen + typewriter
+        const loader = document.getElementById('loader');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                document.body.style.overflow = '';
+                startTypewriter();
+            }, 2600);
+        });
+        document.body.style.overflow = 'hidden';
+
+        function startTypewriter() {
+            const part1 = 'Bouw met ';
+            const part2 = 'vertrouwen.';
+            const elText = document.getElementById('typeText');
+            const elGold = document.getElementById('typeGold');
+            const cursor = document.getElementById('typeCursor');
+            const speed = 70;
+            let i = 0;
+
+            function typePart1() {
+                if (i < part1.length) {
+                    elText.textContent += part1[i];
+                    i++;
+                    setTimeout(typePart1, speed);
+                } else {
+                    i = 0;
+                    setTimeout(typePart2, speed + 40);
+                }
+            }
+
+            function typePart2() {
+                if (i < part2.length) {
+                    elGold.textContent += part2[i];
+                    i++;
+                    setTimeout(typePart2, speed);
+                } else {
+                    // Cursor verdwijnt na 1.5s
+                    setTimeout(() => {
+                        cursor.style.display = 'none';
+                    }, 1500);
+                    // Overige hero-elementen rustig infaden
+                    setTimeout(() => {
+                        document.querySelector('.hero-subtitle').classList.add('fade-in');
+                    }, 200);
+                    setTimeout(() => {
+                        document.querySelector('.hero-description').classList.add('fade-in');
+                    }, 500);
+                    setTimeout(() => {
+                        document.querySelector('.hero-buttons').classList.add('fade-in');
+                    }, 800);
+                }
+            }
+
+            typePart1();
+        }
+
+        // Navbar scroll detection
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Portfolio filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.portfolio-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => observer.observe(el));
+
+        // Form validation
+        const form = document.getElementById('contactForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+                const naam = document.getElementById('naam');
+                const email = document.getElementById('email');
+                const bericht = document.getElementById('bericht');
+
+                document.getElementById('naamError').textContent = '';
+                document.getElementById('emailError').textContent = '';
+                document.getElementById('berichtError').textContent = '';
+
+                if (!naam.value.trim()) {
+                    document.getElementById('naamError').textContent = 'Vul uw naam in.';
+                    valid = false;
+                }
+                if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) {
+                    document.getElementById('emailError').textContent = 'Vul een geldig e-mailadres in.';
+                    valid = false;
+                }
+                if (!bericht.value.trim()) {
+                    document.getElementById('berichtError').textContent = 'Vul een bericht in.';
+                    valid = false;
+                }
+                if (valid) {
+                    document.getElementById('formSuccess').style.display = 'block';
+                    form.reset();
+                    setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+                }
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
